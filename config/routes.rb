@@ -1,51 +1,39 @@
 Rails.application.routes.draw do
+  
   namespace :admin do
-    get 'orders/show'
+    resources :orders, only:[:show]
+    resources :customers, only:[:index,:show,:edit]
+    resources :genres, only:[:index,:edit]
+    resources :items, only:[:new,:index,:show,:edit]
+
+    root to: 'homes#top'
   end
-  namespace :admin do
-    get 'customers/index'
-    get 'customers/show'
-    get 'customers/edit'
-  end
-  namespace :admin do
-    get 'genres/index'
-    get 'genres/edit'
-  end
-  namespace :admin do
-    get 'items/index'
-    get 'items/new'
-    get 'items/show'
-    get 'items/edit'
-  end
-  namespace :admin do
-    get 'homes/top'
-  end
-  namespace :piblic do
-    get 'addresses/index'
-    get 'addresses/edit'
-  end
+
   namespace :public do
-    get 'orders/new'
-    get 'orders/confirm'
-    get 'orders/thanx'
-    get 'orders/index'
-    get 'orders/show'
+    resources :customers, only:[:edit]
+    get 'customers/mypage' => 'customers#show'
+    get 'customers/unsubscribe' => 'customers#unsubscribe'
+    get 'customers/withdraw' => 'customers#withdraw'
+    
+    resources :addresses, only:[:index, :edit]
+    resources :orders, only:[:new,:index,:show]
+    get 'orders/thanx' => 'orders#thanx'
+    get 'orders/confirm' => 'orders#confirm'
+    
+    resources :cart_items, only:[:index]
+    get 'cart_items/destroy_all' => 'cart_items#destroy_all'
+    
+    resources :items, only:[:index,:show]
+
+    root to: 'homes#top'
+    get '/about' => 'homes#about'
+
   end
-  namespace :public do
-    get 'cart_items/index'
-  end
-  namespace :public do
-    get 'items/index'
-    get 'items/show'
-  end
-  namespace :public do
-    get 'homes/top'
-    get 'homes/about'
-  end
-  devise_for :admins,skip:[:registrations,:passwords],controllers:{
+
+  devise_for :admin,skip:[:registrations,:passwords],controllers:{
     sessions:"admin/sessions"
   }
-  
+
   devise_for :customers,skip:[:password],controllers:{
     registrations:"public/registrations",
     sessions:"public/sessions"

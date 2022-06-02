@@ -8,5 +8,11 @@ class Customer < ApplicationRecord
   has_many :cart_items
   has_many :orders
   
-  
+  def active_text
+    if is_active == true
+      "有効会員"
+    else
+      "退会済み"
+    end
+  end  
 end

@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  
+
   namespace :admin do
     resources :orders, only:[:show]
     resources :customers, only:[:index,:show,:edit]
-    resources :genres, only:[:index,:edit]
-    resources :items, only:[:new,:index,:show,:edit]
+    resources :genres, only:[:new,:index,:edit,:create,:update]
+    resources :items, only:[:new,:create,:index,:show,:edit,:update]
 
     root to: 'homes#top'
   end
@@ -14,15 +14,15 @@ Rails.application.routes.draw do
     get 'customers/mypage' => 'customers#show'
     get 'customers/unsubscribe' => 'customers#unsubscribe'
     get 'customers/withdraw' => 'customers#withdraw'
-    
+
     resources :addresses, only:[:index, :edit]
     resources :orders, only:[:new,:index,:show]
     get 'orders/thanx' => 'orders#thanx'
     get 'orders/confirm' => 'orders#confirm'
-    
+
     resources :cart_items, only:[:index]
     get 'cart_items/destroy_all' => 'cart_items#destroy_all'
-    
+
     resources :items, only:[:index,:show]
 
     root to: 'homes#top'

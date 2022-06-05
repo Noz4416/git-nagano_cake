@@ -1,4 +1,15 @@
-<h1>注文履歴詳細</h1>
+<div class ="container my-5">
+  <div class ="row">
+    <h2>注文履歴詳細</h2>
+  </div>
+
+  <div class ="row">
+
+  </div>
+</div>
+
+
+
 
 
 <table>
@@ -52,5 +63,22 @@
         <td><%= order_detail.submit "更新" %></td>
       </tr>
     <% end %>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>商品合計</td>
+      <td><%= @total_price%>円</td>
+    </tr>
+    <tr>
+      <td>送料</td>
+      <td><%= @order.shipping_cost %>円</td>
+    </tr>
+    <tr>
+      <td>請求金額合計</td>
+      <td><%= (@order.shipping_cost + @total_price)%>円</td>
+    </tr>
   </tbody>
 </table>

@@ -1,0 +1,2 @@
+module Piblic::AddressesHelper
+end

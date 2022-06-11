@@ -1,29 +1,82 @@
-<h2>Sign up</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "publics/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class ="container my-5">
+  <div class ="row ml-3">
+    <div class ="offset-sm-1">
+      <h3 class ="bg-warning">新規会員登録</h3>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+  <%= form_with model: @customer, url: new_customer_registration_path do |f| %>
+    <%= render "public/shared/error_messages", resource: resource %>
+      <div class ="row mt-5 ml-5">
+        <div class ="col-sm-10">
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+          <div class ="form-group row">
+            <%= f.label :"名前", class:"col-sm-2"%>
+            <%= f.text_field :last_name, autofocus: true, placeholder: "性", class: "form-control offset-sm-1 col-sm-4" %>
+            <%= f.text_field :first_name, placeholder: "名", class: "form-control offset-sm-1 col-sm-4" %>
+          </div>
 
-<%= render "public/shared/links" %>
+          <div class ="form-group row">
+            <%= f.label :"フリガナ", class:"col-sm-2"%>
+            <%= f.text_field :last_name_kana, placeholder: "セイ", class: "form-control offset-sm-1 col-sm-4" %>
+            <%= f.text_field :first_name_kana, placeholder: "メイ",  class: "form-control offset-sm-1 col-sm-4" %>
+          </div>
+
+          <div class="form-group row">
+            <%= f.label :"メールアドレス", class:"col-sm-2" %>
+            <%= f.email_field :email,　autocomplete: "email", class: "form-control offset-sm-1 col-sm-4" %>
+          </div>
+
+          <div class ="form-group row">
+            <%= f.label :"郵便番号(ハイフン無し)", class:"col-sm-3" %>
+            <%= f.text_field :postal_code, class: "form-control col-sm-4" %>
+          </div>
+
+          <div class ="form-group row">
+            <%= f.label :"住所", class:"col-sm-2" %>
+            <%= f.text_field :address, class: "form-control offset-sm-1 col-sm-8" %>
+          </div>
+
+          <div class ="form-group row">
+            <%= f.label :"電話番号（ハイフン無し）", class:"col-sm-3" %>
+            <%= f.text_field :telephone_number, class: "form-control col-sm-4" %>
+          </div>
+
+          <div class="form-group row">
+            <div class ="col-sm-3" >
+              <%= f.label :"パスワード"%>
+              <% if @minimum_password_length %>
+              <em>(<%= @minimum_password_length %>文字以上)</em>
+              <% end %>
+            </div>
+              <%= f.password_field :password, autocomplete: "new-password", class: "form-control col-sm-4" %>
+          </div>
+
+          <div class="form-group row">
+            <div class ="col-sm-3" >
+              <%= f.label :"パスワード" %>
+              <em>(確認用)</em>
+            </div>
+             <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control col-sm-4" %>
+          </div>
+
+          <div class="actions row">
+            <%= f.submit "新規登録", class:"btn btn-success offset-sm-3 col-sm-3 mt-4" %>
+          </div>
+        </div>
+      </div>
+  <% end %>
+
+
+    <div class ="row mt-5 ml-2">
+      <div class ="offset-sm-1">
+        <h4 class ="bg-warning">既にご登録済みの方</h4>
+      </div>
+    </div>
+    <div class ="row my-4">
+      <div class ="offset-sm-2">
+        <h5><%= render "public/shared/links" %>からログインしてください。</h5>
+      </div>
+    </div>
+</div>

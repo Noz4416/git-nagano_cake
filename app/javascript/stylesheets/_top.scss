@@ -1,0 +1,15 @@
+.main-visual{
+  display: block;
+  height: 450px;
+  width: 80%;
+  background-image: url('/images/ichigo_s.jpg');
+  background-size: cover;
+  background-position: top center;
+}
+
+.main-text{
+  display: flex;
+  height: 450px;
+  justify-content: center;
+  align-items: center;
+}

@@ -18,14 +18,14 @@
   <div class ="row mx-auto mt-3">
     <% @items.last(4).each do |item|%>
       <div class ="mx-auto">
-        <%= link_to item_path(item) do %>
-          <%= image_tag item, :size => '100x100' %>
+        <%= link_to public_item_path(item) do %>
+          <%= image_tag item.image, :size => '150x150' %>
         <% end %>
         <div class ="row mt-3" %>
           <span><%= item.name %></span>
         </div>
         <div class ="row mt-1" %>
-          <span><%= item.tax_in_price %></span>
+          <span><%= item.tax_in_price %>円</span>
         </div>
       </div>
     <% end %>

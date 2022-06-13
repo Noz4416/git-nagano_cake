@@ -64,3 +64,5 @@ gem "enum_help"
 gem 'faker'
 gem 'gimei'
 
+gem 'image_processing', '~> 1.2'
+

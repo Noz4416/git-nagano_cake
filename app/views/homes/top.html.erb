@@ -19,7 +19,7 @@
     <% @items.last(4).each do |item|%>
       <div class ="mx-auto">
         <%= link_to public_item_path(item) do %>
-          <%= image_tag item.image, :size => '150x150' %>
+          <%= image_tag item.get_image(150,150) %>
         <% end %>
         <div class ="row mt-3" %>
           <span><%= item.name %></span>

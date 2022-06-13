@@ -27,3 +27,13 @@
   def admin_url
     request .fullpath .include?("/admin")
   end
+  
+  
+  
+  def calculate(customer)
+    total_price = 0
+    customer.cart_items.each do |cart_item|
+      total_price += cart_item.amount*cart_item.item.tax_in_price
+    end
+    return total_price
+  end

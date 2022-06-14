@@ -7,4 +7,7 @@ class CartItem < ApplicationRecord
     item.tax_in_price * amount
   end
 
+  validates :amount, presence: true
+
+
 end

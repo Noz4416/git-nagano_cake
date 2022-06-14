@@ -20,10 +20,15 @@ Rails.application.routes.draw do
     get 'customers/mypage' => 'customers#show'
     get 'customers/unsubscribe' => 'customers#unsubscribe'
     get 'customers/withdraw' => 'customers#withdraw'
-    get 'cart_items/destroy_all' => 'cart_items#destroy_all'
+    # get 'cart_items/destroy_all' => 'cart_items#destroy_all'
     get 'orders/thanx' => 'orders#thanx'
     get 'orders/confirm' => 'orders#confirm'
 
+    resources :cart_items do
+      collection do
+        delete 'destroy_all'
+      end
+    end
     resources :addresses, only:[:index, :edit, :update, :destroy, :create]
     resources :cart_items, only:[:index,:create,:update,:destroy]
     resources :orders, only:[:new,:index,:show]

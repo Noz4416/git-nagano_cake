@@ -1,2 +1,45 @@
-<h1>Public::Orders#confirm</h1>
-<p>Find me in app/views/public/orders/confirm.html.erb</p>
+<h3>注文情報確認</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>商品名</th>
+      <th>単価(税込)</th>
+      <th>数量</th>
+      <th>小計</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cart_items.each do |cart_item| %>
+      <tr>
+        <td><%= cart_item.item.name %></td>
+        <td><%= cart_item.item.tax_inprice %></td>
+        <td><%= cart_item.amount %></td>
+        <td><%= cart_item.sum_of_price %></td>
+      </tr>
+      <% end %>
+  </tbody>
+</table>
+<table>
+  <tr>
+    <td>送料</td>
+    <td><%= @order.shipping_cost %></td>
+  </tr>
+  <tr>
+    <td>商品合計</td>
+    <td><%= @total.round.to_s(:delimited) %></td>
+  </tr>
+  <tr>
+    <td>請求額</td>
+    <td><%= @total_payment.round.to_s(:delimited) %></td>
+  </tr>
+</table>
+
+<div>
+  <span>支払方法</span>
+  <%= session[:payment_method] %>
+</div>
+<div>
+  <span>お届け先</span>
+  <%= session[:address] %>
+</div>

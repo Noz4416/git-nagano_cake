@@ -9,7 +9,7 @@ ja:
     order:
       payment_method:
         credit_card: "クレジットカード"
-        transfar: "銀行振込"
+        transfer: "銀行振込"
 
 ja:
   enums:

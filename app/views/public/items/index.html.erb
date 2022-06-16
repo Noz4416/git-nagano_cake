@@ -1,2 +1,20 @@
-<h1>Public::Items#index</h1>
-<p>Find me in app/views/public/items/index.html.erb</p>
+<div>
+  <h3>商品一覧</h3>
+  <span>(全<%= @items.count %>件）</span>
+</div>
+
+  <div class ="row d-flex flex-wrap mx-5 my-5">
+    <% @items.each do |item|%>
+      <div class ="mx-5 my-4">
+        <%= link_to public_item_path(item) do %>
+          <%= image_tag item.get_image(200,200) %>
+        <% end %>
+        <div class ="row mt-3" %>
+          <span><%= item.name %></span>
+        </div>
+        <div class ="row mt-1" %>
+          <span><%= item.tax_in_price %>円</span>
+        </div>
+      </div>
+    <% end %>
+  </div>

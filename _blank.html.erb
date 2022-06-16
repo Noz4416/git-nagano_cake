@@ -6,3 +6,34 @@
   <% end %>
   
 <%= paginate @items %>
+
+
+   <div class ="row mt-5 ml-2">
+      <div class ="offset-sm-1">
+        <h4 class ="bg-warning">会員登録がお済みでない方</h4>
+      </div>
+    </div>
+
+    <div class ="row my-3">
+      <div class ="offset-2">
+        <h5><%= render "public/shared/links" %>から新規登録を行ってください。</h5>
+      </div>
+    </div>
+</div>
+
+
+
+
+  def admin_url
+    request .fullpath .include?("/admin")
+  end
+  
+  
+  
+  def calculate(customer)
+    total_price = 0
+    customer.cart_items.each do |cart_item|
+      total_price += cart_item.amount*cart_item.item.tax_in_price
+    end
+    return total_price
+  end

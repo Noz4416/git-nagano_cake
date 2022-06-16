@@ -7,6 +7,7 @@ class Order < ApplicationRecord
 
   enum status: {waiting: 0, confirmation: 1, production: 2,ready: 3,sent: 4}
 
+
   def shipping_cost
     800
   end

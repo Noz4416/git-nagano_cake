@@ -13,9 +13,9 @@
     <% @cart_items.each do |cart_item| %>
       <tr>
         <td><%= cart_item.item.name %></td>
-        <td><%= cart_item.item.tax_inprice %></td>
+        <td><%= cart_item.item.tax_in_price.round.to_s(:delimited) %></td>
         <td><%= cart_item.amount %></td>
-        <td><%= cart_item.sum_of_price %></td>
+        <td><%= cart_item.sum_of_price.round.to_s(:delimited) %></td>
       </tr>
       <% end %>
   </tbody>
@@ -41,5 +41,5 @@
 </div>
 <div>
   <span>お届け先</span>
-  <%= session[:address] %>
+  <%= session[:address_number] %>
 </div>

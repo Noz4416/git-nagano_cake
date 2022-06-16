@@ -4,8 +4,10 @@
 <%= form_with model: @order, url: public_orders_confirm_path, method: :post do |f| %>
 <div>
   <span>支払い方法</span></br>
-    <%= f.radio_button :payment_method, Order.payment_methods_i18n[:credit_card] %></br>
-    <%= f.radio_button :payment_method, Order.payment_methods_i18n[:transfer] %>
+    <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
+    <%= Order.payment_methods_i18n[:credit_card]%></br>
+    <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
+    <%= Order.payment_methods_i18n[:transfer] %>
 </div>
 <div>
   <span>お届け先</span>
@@ -18,7 +20,7 @@
   <div>
     <%= f.radio_button :address_number, 2 %>
     <%= f.label :address_number_2, "登録先住所から選択" %></br>
-    <%= f.collection_select :address, current_customer.addresses.all, :id, :address %>
+    <%= f.collection_select :address, current_customer.addresses.all, :id, :address_code %>
   </div>
   <div>
     <%= f.radio_button :address_number, 3 %>

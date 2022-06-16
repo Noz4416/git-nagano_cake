@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     get 'customers/withdraw' => 'customers#withdraw'
     # get 'cart_items/destroy_all' => 'cart_items#destroy_all'
     get 'orders/thanx' => 'orders#thanx'
-    get 'orders/confirm' => 'orders#confirm'
+    post 'orders/confirm' => 'orders#confirm'
 
     resources :cart_items do
       collection do

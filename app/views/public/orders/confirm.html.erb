@@ -37,9 +37,15 @@
 
 <div>
   <span>支払方法</span>
-  <%= session[:payment_method] %>
+  <%= @order.payment_method %>
 </div>
 <div>
   <span>お届け先</span>
-  <%= session[:address_number] %>
+  <%= @order.postal_code %>
+  <%= @order.address %></br>
+  <%= @order.name %>
+</div>
+
+<div>
+  <%= link_to "注文を確定する"%>
 </div>

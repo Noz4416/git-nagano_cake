@@ -13,10 +13,12 @@
   <tbody>
     <% @orders.each do |order|%>
       <tr>
-        <td><%= order. l customer.created_at, format: :short %></td>
-        <td><%= order.postal_code %></br>
-            <%= order.address %></br>
-            <%= order.name %></td>
+        <td><%= order. l order.customer.created_at, format: :short %></td>
+        <td>
+          <%= order.postal_code %></br>
+          <%= order.address %></br>
+          <%= order.name %>
+        </td>
         <td><%= order.order_detail.item %></td>
         <td><%= order.total_payment %></td>
         <td><%= order.status %></td>

@@ -13,7 +13,7 @@ class Order < ApplicationRecord
   end
 
   def sum_of_price
-    item.tax_in_price * quantity
+    item.tax_in_price * amount
   end
 
 end

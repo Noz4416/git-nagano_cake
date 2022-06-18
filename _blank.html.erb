@@ -4,7 +4,7 @@
       <%= f.label :remember_me %>
     </div>
   <% end %>
-  
+
 <%= paginate @items %>
 
 
@@ -27,9 +27,9 @@
   def admin_url
     request .fullpath .include?("/admin")
   end
-  
-  
-  
+
+
+
   def calculate(customer)
     total_price = 0
     customer.cart_items.each do |cart_item|
@@ -37,10 +37,10 @@
     end
     return total_price
   end
-  
-     
-      
-    
+
+
+
+
     session[:payment_method] = @order.payment_method
     session[:address] = params[:address_number]
 
@@ -110,4 +110,21 @@ en:
         one: "1 error prohibited this %{resource} from being saved:"
         other: "%{count} errors prohibited this %{resource} from being saved:"
 
+
+  before_action :authenticate_customer!, except: [:top,:about]
+  
+  
+    order = Order.new(order_params)
+    order.customer_id = current_customer.id
+    order.payment_method = params[:order][:payment_method]
+    order.postal_code = params[:order][:postal_code]
+    order.address = params[:order][:address]
+    order.name = params[:order][:name]
+    order.total_payment = 
+    
+    
+      <%= form_with @cart_item public_orders_path, method: :post do |f| %>
+    <%= f.hidden_field :item_id %>
+    <%= f.hidden_field :amount %>
+    <%= f.hidden_field :item.taxin_price %>
 

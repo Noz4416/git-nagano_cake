@@ -5,25 +5,25 @@
 <div>
   <span>支払い方法</span></br>
     <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
-    <%= Order.payment_methods_i18n[:credit_card] %></br>
+    <%= f.label :payment_method, Order.payment_methods_i18n[:credit_card] %></br>
     <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
-    <%= Order.payment_methods_i18n[:transfer] %>
+    <%= f.label :payment_method, Order.payment_methods_i18n[:transfer] %>
 </div>
 <div>
   <span>お届け先</span>
   <div>
-    <%= f.radio_button :address_number, 1 %>
+    <%= f.radio_button :address_number, 0 %>
     <%= f.label :address, "ご自身の住所" %></br>
     <%= current_customer.customer_address %></br>
     <%= current_customer.customer_name %>
   </div>
   <div>
-    <%= f.radio_button :address_number, 2 %>
+    <%= f.radio_button :address_number, 1 %>
     <%= f.label :address, "登録先住所から選択" %></br>
     <%= f.collection_select :address_id, current_customer.addresses.all, :id, :address_code %>
   </div>
   <div>
-    <%= f.radio_button :address_number, 3 %>
+    <%= f.radio_button :address_number, 2 %>
     <%= f.label :address, "新しいお届け先" %></br>
     <%= f.label :"郵便番号(ハイフン無し)" %>
     <%= f.text_field :postal_code %></br>

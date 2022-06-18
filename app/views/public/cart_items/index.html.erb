@@ -30,17 +30,17 @@
   </tbody>
 </table>
 
+
 <table>
   <tr>
     <td>合計金額</td>
     <td><%= @total.round.to_s(:delimited) %></td>
   </tr>
 </table>
-
-
 <div>
   <%= link_to "買い物を続ける", public_items_path %>
 </div>
+
 <!--カートが空なら表示しない-->
 <% if @cart_items != [] %>
 <div>

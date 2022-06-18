@@ -1,19 +1,25 @@
 # frozen_string_literal: true
 
 class Public::SessionsController < Devise::SessionsController
+
   before_action :customer_state, only: [:create]
-  
+
   protected
-  
+
   # 退会しているかを判断するメソッド
   def customer_state
   #.処理1、入力されたemailからアカウント1件取得
-　@customer = Customer.find_by(email: params[:customer][:email])
-　# アカウントを取得出来なければ、メソッドを終了
-　return if!@customer
-　# 処理2、取得したアカウントのパスワードと入力されたものが正しいか判別
-　if @customer.valid_password?(params[:customer][:password])
-    # @customer && (@customer.is_active == false)
+    @customer = Customer.find_by(email: params[:customer][:email])
+  # アカウントを取得出来なければ、メソッドを終了
+    return if !@customer
+  # 処理2、取得したアカウントのパスワードと入力されたものが正しいか判別
+    if @customer.valid_password?(params[:customer][:password]) && !@customer.is_active
+      flash[:notice] = "退会済みです。再度ご登録してご利用下さい。"
+      redirect_to new_customer_registration_path
+    end
+  end
+
+
 
 
 

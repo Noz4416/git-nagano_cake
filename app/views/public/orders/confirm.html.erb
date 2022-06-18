@@ -13,9 +13,9 @@
     <% @cart_items.each do |cart_item| %>
       <tr>
         <td><%= cart_item.item.name %></td>
-        <td><%= cart_item.item.tax_inprice %></td>
+        <td><%= cart_item.item.tax_in_price.round.to_s(:delimited) %></td>
         <td><%= cart_item.amount %></td>
-        <td><%= cart_item.sum_of_price %></td>
+        <td><%= cart_item.sum_of_price.round.to_s(:delimited) %></td>
       </tr>
       <% end %>
   </tbody>
@@ -37,9 +37,22 @@
 
 <div>
   <span>支払方法</span>
-  <%= session[:payment_method] %>
+  <%= @order.payment_method_i18n %>
 </div>
 <div>
   <span>お届け先</span>
-  <%= session[:address] %>
+  <%= @order.postal_code %>
+  <%= @order.address %></br>
+  <%= @order.name %>
+</div>
+
+<div>
+  <%= form_with model: @order, url: public_orders_path, method: :post do |f| %>
+    <%= f.hidden_field :order_id %>
+    <%= f.hidden_field :payment_method %>
+    <%= f.hidden_field :postal_code %>
+    <%= f.hidden_field :address %>
+    <%= f.hidden_field :name %>
+    <%= f.submit "注文を確定する" %>
+  <% end %>
 </div>

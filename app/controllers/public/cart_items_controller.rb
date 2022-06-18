@@ -1,4 +1,8 @@
 class Public::CartItemsController < ApplicationController
+  
+  before_action :authenticate_customer!
+
+  
   def index
     @cart_items = current_customer.cart_items.all
     @total = @cart_items.inject(0) {|sum, item| sum + item.sum_of_price}
@@ -12,7 +16,7 @@ class Public::CartItemsController < ApplicationController
 
   def create
     cart_item = CartItem.new(cart_item_params)
-    cart_item.customer_id = current_customer.id
+    cart_item.customer_id = current_customer_id
     # 同一商品があれば、個数を追加する。to_iは文字列を整数に変換
     if cart_item = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
       cart_item.amount += params[:cart_item][:amount].to_i

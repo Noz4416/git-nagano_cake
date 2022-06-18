@@ -19,10 +19,10 @@ Rails.application.routes.draw do
 
     get 'customers/mypage' => 'customers#show'
     get 'customers/unsubscribe' => 'customers#unsubscribe'
-    get 'customers/withdraw' => 'customers#withdraw'
+    patch 'customers/withdraw' => 'customers#withdraw'
     # get 'cart_items/destroy_all' => 'cart_items#destroy_all'
     get 'orders/thanx' => 'orders#thanx'
-    get 'orders/confirm' => 'orders#confirm'
+    post 'orders/confirm' => 'orders#confirm'
 
     resources :cart_items do
       collection do
@@ -31,7 +31,7 @@ Rails.application.routes.draw do
     end
     resources :addresses, only:[:index, :edit, :update, :destroy, :create]
     resources :cart_items, only:[:index,:create,:update,:destroy]
-    resources :orders, only:[:new,:index,:show]
+    resources :orders, only:[:new,:index,:show,:create]
     resources :customers, only:[:show, :update, :edit]
     resources :items, only:[:index,:show]
 

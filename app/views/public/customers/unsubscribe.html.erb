@@ -20,7 +20,7 @@
 
   <div class ="row my-5">
     <div class ="col-sm-4 ml-4"></div>
-      <%= link_to "退会しない", public_customers_mypage_path, class:"btn btn-primary btn-lg" %>
+      <%= link_to "退会しない", public_customers_mypage_path(current_customer), class:"btn btn-primary btn-lg" %>
       <%= link_to "退会する", public_customers_withdraw_path, method: :patch, class:"btn btn-danger btn-lg offset-1" %>
     </div>
   </div>

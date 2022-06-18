@@ -1,6 +1,8 @@
 class Public::CustomersController < ApplicationController
+  
+  before_action :authenticate_customer!
+  
   def show
-    # @customer = Customer.find(params[:id])
     @customer = current_customer
   end
 
@@ -21,8 +23,9 @@ class Public::CustomersController < ApplicationController
   def withdraw
     @customer = current_customer
     @customer.update(is_active: false)
-    sign_out current__customer
-
+    reset_session
+    flash[:notice] = "退会処理を完了いたしました。"
+    redirect_to root_path
   end
 
   private

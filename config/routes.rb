@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
     get 'customers/mypage' => 'customers#show'
     get 'customers/unsubscribe' => 'customers#unsubscribe'
-    get 'customers/withdraw' => 'customers#withdraw'
+    patch 'customers/withdraw' => 'customers#withdraw'
     # get 'cart_items/destroy_all' => 'cart_items#destroy_all'
     get 'orders/thanx' => 'orders#thanx'
     post 'orders/confirm' => 'orders#confirm'

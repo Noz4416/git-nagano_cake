@@ -4,7 +4,8 @@ class Public::ItemsController < ApplicationController
 
 
   def index
-    @items = Item.all
+    # per(x)で1ページに表示したい件数設定
+    @items = Item.page(params[:page]).per(6)
   end
 
   def show

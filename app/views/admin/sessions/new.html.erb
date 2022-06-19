@@ -4,8 +4,8 @@
 
       <h2>管理者ログイン</h2>
 
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <div class="field form-group">
+      <%= form_with model: @admin, url: new_session_path(resource_name) do |f| %>
+        <div class="field form-group mt-5">
           <%= f.label :"メールアドレス　" %>
           <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
         </div>
@@ -16,9 +16,9 @@
         </div>
 
 
-        <div class="offset-sm-4 col-sm-4">
+        <div class="offset-sm-4 col-sm-4 my-5">
           <div class ="action">
-          <%= f.submit "ログイン", class: "btn btn-primary btn-block" %>
+          <%= f.submit "ログイン", class: "btn btn-primary btn-block btn-lg" %>
           </div>
         </div>
       <% end %>

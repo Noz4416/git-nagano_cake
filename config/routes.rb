@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'homes#top'
     get '/customer/:id/orders' => 'orders#index', as: "customer_orders"
+    patch '/order/:id/status' => 'order#status', as: "order_status"
+    patch '/orderdetail/:id/status' => 'order_detail#status', as: "making_status"
 
     resources :orders, only:[:show,:index]
     resources :customers, only:[:index,:show,:edit]
@@ -42,12 +44,12 @@ Rails.application.routes.draw do
 
 
 
-
-  devise_for :admin,skip:[:registrations,:passwords],controllers:{
+  # devise_for :admin
+  devise_for :admin, skip:[:registrations,:passwords],controllers:{
     sessions:"admin/sessions"
   }
 
-  devise_for :customers,skip:[:password],controllers:{
+  devise_for :customers, skip:[:password],controllers:{
     registrations:"public/registrations",
     sessions:"public/sessions"
   }

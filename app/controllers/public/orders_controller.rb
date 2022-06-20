@@ -2,6 +2,7 @@ class Public::OrdersController < ApplicationController
 
   before_action :authenticate_customer!
 
+
   def new
     @order = Order.new
   end
@@ -9,13 +10,16 @@ class Public::OrdersController < ApplicationController
   def create
     cart_items = current_customer.cart_items.all
     order = current_customer.orders.new(order_params)
+    order.total_payment = cart_items.inject(0) {|sum, item| sum + item.sum_of_price} + order.shipping_cost
+    order.status = 0
     order.save
     cart_items.each do |cart_item|
       order_detail = OrderDetail.new
       order_detail.item_id = cart_item.item_id
       order_detail.order_id = order.id
       order_detail.amount = cart_item.amount
-      order_detail.price = cart_item.item.tax_in_price
+      order_detail.price = cart_item.item.price
+      order_detail.making_status = 0
       order_detail.save
     end
     cart_items.destroy_all
@@ -55,14 +59,15 @@ class Public::OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @order_details = @order.order_details
-    @total = @order_details.inject(0) {|sum, item| sum + item.sum_of_price}
-    @total_payment = @total + @order.shipping_cost
+    @total = @order_details.inject(0) {|sum, price| sum + price.sum_of_price}
   end
+
 
   private
 
   def order_params
-    params.require(:order).permit(:postal_code,:address,:name,:payment_method)
+    params.require(:order).permit(:postal_code,:address,:name,:payment_method,:total_payment)
   end
+
 
 end

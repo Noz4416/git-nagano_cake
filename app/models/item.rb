@@ -9,6 +9,7 @@ class Item < ApplicationRecord
   has_many :order_details
 
 
+
   def tax_in_price
     (price * 1.1).floor
   end
@@ -18,7 +19,7 @@ class Item < ApplicationRecord
     if is_active == true
       "販売中"
     else
-      "販売停止中"
+      "売切れ"
     end
   end
 

@@ -1,7 +1,8 @@
-<div>
-  <h3>商品一覧</h3>
-  <span>(全<%= @items.count %>件）</span>
-</div>
+<div class ="container my-5">
+  <div class ="row ml-3">
+    <h3>商品一覧</h3>
+    <span>(全<%= @items.count %>件）</span>
+  </div>
 
   <div class ="row d-flex flex-wrap mx-5 my-5">
     <% @items.each do |item|%>
@@ -18,3 +19,10 @@
       </div>
     <% end %>
   </div>
+
+  <div class ="row">
+    <div class ="col-sm-4 offset-sm-4 py-2 mt-5">
+      <%= paginate @items %>
+    </div>
+  </div>
+</div>

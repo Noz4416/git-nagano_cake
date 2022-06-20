@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'homes#top'
     get '/customer/:id/orders' => 'orders#index', as: "customer_orders"
+    patch '/orders/:id/status' => 'orders#order_status_update', as: "order_status"
+    patch '/orders/:id/making_status' => 'orders#making_status_update', as: "making_status"
 
     resources :orders, only:[:show,:index]
     resources :customers, only:[:index,:show,:edit]
@@ -23,6 +25,7 @@ Rails.application.routes.draw do
     # get 'cart_items/destroy_all' => 'cart_items#destroy_all'
     get 'orders/thanx' => 'orders#thanx'
     post 'orders/confirm' => 'orders#confirm'
+    get 'orders/confirm' => 'orders#confirm'
 
     resources :cart_items do
       collection do
@@ -41,12 +44,12 @@ Rails.application.routes.draw do
 
 
 
-
-  devise_for :admin,skip:[:registrations,:passwords],controllers:{
+  # devise_for :admin
+  devise_for :admin, skip:[:registrations,:passwords],controllers:{
     sessions:"admin/sessions"
   }
 
-  devise_for :customers,skip:[:password],controllers:{
+  devise_for :customers, skip:[:password],controllers:{
     registrations:"public/registrations",
     sessions:"public/sessions"
   }

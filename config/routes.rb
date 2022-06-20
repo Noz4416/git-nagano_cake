@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'homes#top'
     get '/customer/:id/orders' => 'orders#index', as: "customer_orders"
-    patch '/order/:id/status' => 'order#status', as: "order_status"
-    patch '/orderdetail/:id/status' => 'order_detail#status', as: "making_status"
+    patch '/orders/:id/status' => 'orders#order_status_update', as: "order_status"
+    patch '/orders/:id/making_status' => 'orders#making_status_update', as: "making_status"
 
     resources :orders, only:[:show,:index]
     resources :customers, only:[:index,:show,:edit]

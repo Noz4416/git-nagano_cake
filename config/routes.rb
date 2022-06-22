@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     get '/about' => 'homes#about', as: "about"
 
   namespace :admin do
-    root to: 'homes#top'
+
     get '/customer/:id/orders' => 'orders#index', as: "customer_orders"
     patch '/orders/:id/status' => 'orders#order_status_update', as: "order_status"
     patch '/orders/:id/making_status' => 'orders#making_status_update', as: "making_status"
@@ -42,9 +42,6 @@ Rails.application.routes.draw do
   end
 
 
-
-
-  # devise_for :admin
   devise_for :admin, skip:[:registrations,:passwords],controllers:{
     sessions:"admin/sessions"
   }
@@ -53,5 +50,9 @@ Rails.application.routes.draw do
     registrations:"public/registrations",
     sessions:"public/sessions"
   }
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  devise_scope :admin do
+    get '/admin' => 'admin/sessions#new'
+  end
+
 end

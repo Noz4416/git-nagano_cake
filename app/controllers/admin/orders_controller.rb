@@ -10,11 +10,9 @@ class Admin::OrdersController < ApplicationController
   end
 
   def index
-    if params[:id]
-      @orders = Customer.find(params[:id]).orders.page(params[:page])
-    else
-      @orders = Order.page(params[:page])
-    end
+    # order(created_at: :desc)で、新規注文順の表示
+    @orders = Order.page(params[:page]).per(6).order(created_at: :desc)
+    # 古い注文順の場合は、order(created_at: :asc)
   end
 
   # 受注ステータスupdate

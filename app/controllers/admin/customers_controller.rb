@@ -20,6 +20,11 @@ class Admin::CustomersController < ApplicationController
     redirect_to admin_customers_path
   end
 
+  def orders_index
+    @customer = Customer.find(params[:id])
+    @orders = Order.where(customer_id:@customer).page(params[:page]).per(6).order(created_at: :desc)
+  end
+
   private
 
   def customer_params

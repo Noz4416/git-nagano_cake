@@ -1,6 +1,6 @@
 <div class ="container my-5">
   <div class ="row ml-5">
-    <h3 class ="font-weight-bold bg-warning">
+    <h3 class ="bg-warning">
       <strong><%= @customer.last_name %><%= @customer.first_name %></strong>
       さんの<strong>会員詳細</strong>
     </h3>
@@ -16,11 +16,11 @@
           </tr>
           <tr>
             <td class ="col-sm-3">氏名</td>
-            <td class ="col-sm-6"><%= @customer.first_name %><%= @customer.last_name %></td>
+            <td class ="col-sm-6"><%= @customer.last_name %><%= @customer.first_name %></td>
           </tr>
           <tr>
             <td class ="col-sm-3">フリガナ</td>
-            <td class ="col-sm-6"><%= @customer.first_name_kana %><%= @customer.last_name_kana %></td>
+            <td class ="col-sm-6"><%= @customer.last_name_kana %><%= @customer.first_name_kana %></td>
           </tr>
           <tr>
             <td class ="col-sm-3">郵便番号</td>
@@ -51,7 +51,7 @@
       <%= link_to "編集する", edit_admin_customer_path, class: "btn btn-success btn-lg" %>
     </div>
     <div class ="action ml-5 mb-5">
-      <%= link_to "注文履歴一覧を見る", admin_customer_orders_path, class: "btn btn-primary btn-lg"%>
+      <%= link_to "注文履歴一覧を見る", admin_orders_index_path(@customer), class: "btn btn-primary btn-lg"%>
     </div>
   </div>
 </div>

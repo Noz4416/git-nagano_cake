@@ -5,12 +5,13 @@ Rails.application.routes.draw do
 
   namespace :admin do
 
+    get '/customer/:id/orders_index' => 'customers#orders_index', as: "orders_index"
     get '/customer/:id/orders' => 'orders#index', as: "customer_orders"
     patch '/orders/:id/status' => 'orders#order_status_update', as: "order_status"
     patch '/orders/:id/making_status' => 'orders#making_status_update', as: "making_status"
 
     resources :orders, only:[:show,:index]
-    resources :customers, only:[:index,:show,:edit]
+    resources :customers, only:[:index,:show,:edit,:update]
     resources :genres, only:[:new,:index,:edit,:create,:update]
     resources :items, only:[:new,:create,:index,:show,:edit,:update]
 
